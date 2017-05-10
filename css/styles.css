@@ -8,13 +8,21 @@
 
 img {
   visibility: hidden;
+  opacity: .3;
 }
 
 h1 {
   font-size: 273px;
   margin: 0;
+  color: white;
 }
 
 #new {
   font-size: 100px;
+}
+
+body {
+  background-image: url(../img/background.jpg);
+  color: white;
+
 }

@@ -12,27 +12,21 @@ $(document).ready(function(){
   newGame.array[7] = false;
   newGame.array[8] = false;
 
-  $("#restart").click(function(){
-
-  });
-
-
-
-
   $("#topLeft").click(function(){
     if(newGame.array[0] === false){
       $("#topLeft").empty();
       //if(playerone turn)
       $("#topLeft").append('<h1>' + newGame.player1 + '</h1>');
 
-      //if(playertwo turn
-      // $("#topLeft").append('<h1>' + player2.mark + '</h1>');
       gameTime += 1;
       newGame.array[0] = true;
+      newGame.win[0] = "x";
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+        winner(newGame);
+
     }
 
   });
@@ -41,11 +35,13 @@ $(document).ready(function(){
       $("#topCenter").empty();
       $("#topCenter").append('<h1>' + newGame.player1 + '</h1>');
       newGame.array[1] = true;
+      newGame.win[1] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+      winner(newGame);
     }
   });
   $("#topRight").click(function(){
@@ -53,11 +49,13 @@ $(document).ready(function(){
       $("#topRight").empty();
       $("#topRight").append('<h1>' + newGame.player1 + '</h1>');
       newGame.array[2] = true;
+      newGame.win[2] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+      winner(newGame);
     }
   });
   $("#middleLeft").click(function(){
@@ -65,11 +63,13 @@ $(document).ready(function(){
       $("#middleLeft").empty();
       $("#middleLeft").append('<h1>' + newGame.player1 + '</h1>');
       newGame.array[3] = true;
+      newGame.win[3] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+      winner(newGame);
     }
   });
   $("#middleCenter").click(function(){
@@ -77,11 +77,13 @@ $(document).ready(function(){
       $("#middleCenter").empty();
       $("#middleCenter").append('<h1>' + newGame.player1 + '</h1>');
       newGame.array[4] = true;
+      newGame.win[4] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+      winner(newGame);
     }
   });
   $("#middleRight").click(function(){
@@ -89,11 +91,13 @@ $(document).ready(function(){
       $("#middleRight").empty();
       $("#middleRight").append('<h1>' + newGame.player1 + '</h1>');
       newGame.array[5] = true;
+      newGame.win[5] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+    winner(newGame);
     }
   });
   $("#bottomLeft").click(function(){
@@ -101,11 +105,13 @@ $(document).ready(function(){
       $("#bottomLeft").empty();
       $("#bottomLeft").append('<h1>' + newGame.player1 + '</h1>');
       newGame.array[6] = true;
+      newGame.win[6] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+      winner(newGame);
     }
   });
   $("#bottomCenter").click(function(){
@@ -114,11 +120,13 @@ $(document).ready(function(){
       $("#bottomCenter").append('<h1>' + newGame.player1 + '</h1>');
 
       newGame.array[7] = true;
+      newGame.win[7] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+      winner(newGame);
     }
 
   });
@@ -127,13 +135,14 @@ $(document).ready(function(){
       $("#bottomRight").empty();
       $("#bottomRight").append('<h1>' + newGame.player1 + '</h1>');
       newGame.array[8] = true;
+      newGame.win[8] = "x";
       gameTime += 1;
       gameTime = aiChoose(newGame, gameTime);
       if(gameTime > 8){
         gameOver();
       }
+      winner(newGame);
     }
-
   });
 
   return false;
@@ -153,7 +162,7 @@ var aiChoose = function(newGame, gameTime){
     }
   }
   if(gameTime > 8){
-    gameOver();
+    gameOver(newGame);
   }
 }
 function Game (){
@@ -161,10 +170,10 @@ function Game (){
   this.player2 = "O";
   this.board = ["#topLeft", "#topCenter", "#topRight", "#middleLeft", "#middleCenter", "#middleRight", "#bottomLeft", "#bottomCenter", "#bottomRight"]
   this.array = ["tlBool", "tcBool", "trBool", "mlBool", "mcBool", "mrBool", "blBool", "bcBool", "brBool"];
-  //this.gameTime = 0;
+  this.win = ["", "", "", "", "", "", "", "", ""];
 }
 
-var gameOver = function(){
+var gameOver = function(newGame){
   $(".row").hide();
   $("#gameOver").append('<h1>' + "GAME OVER" + '</h1>');
   $("#gameOver").append("Play again?");
@@ -184,4 +193,55 @@ var restart = function(newGame){
 
 function myFunction() {
     location.reload();
+};
+
+var winner = function(newGame) {
+  if (newGame.win[0] === newGame.win[1] && newGame.win[0] === newGame.win[2]){
+    if(newGame.win[0] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
+  if (newGame.win[3] === newGame.win[4] && newGame.win[3] === newGame.win[5]){
+    if(newGame.win[3] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
+  if (newGame.win[6] === newGame.win[7] && newGame.win[6] === newGame.win[8]){
+    if(newGame.win[6] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
+  if (newGame.win[0] === newGame.win[3] && newGame.win[0] === newGame.win[6]){
+    if(newGame.win[0] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
+  if (newGame.win[1] === newGame.win[4] && newGame.win[1] === newGame.win[7]){
+    if(newGame.win[1] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
+  if (newGame.win[2] === newGame.win[5] && newGame.win[2] === newGame.win[8]){
+    if(newGame.win[2] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
+  if (newGame.win[0] === newGame.win[4] && newGame.win[0] === newGame.win[8]){
+    if(newGame.win[0] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
+  if (newGame.win[2] === newGame.win[4] && newGame.win[2] === newGame.win[6]){
+    if(newGame.win[2] === "x"){
+      alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+  }
 };
