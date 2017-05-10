@@ -1,0 +1,16 @@
+#topLeft, #topCenter, #topRight, #middleLeft, #middleCenter, #middleRight, #bottomLeft, #bottomCenter, #bottomRight {
+  border: 2px solid black;
+}
+/*#middleCenter {
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+}*/
+
+img {
+  visibility: hidden;
+}
+
+h1 {
+  font-size: 273px;
+  margin: 0;
+}
