@@ -1,10 +1,6 @@
 #topLeft, #topCenter, #topRight, #middleLeft, #middleCenter, #middleRight, #bottomLeft, #bottomCenter, #bottomRight {
-  border: 2px solid black;
+  border: 2px solid grey;
 }
-/*#middleCenter {
-  border-left: 3px solid black;
-  border-right: 3px solid black;
-}*/
 
 img {
   visibility: hidden;
@@ -15,6 +11,8 @@ h1 {
   font-size: 273px;
   margin: 0;
   color: white;
+  text-align: center;
+
 }
 
 #new {
@@ -25,4 +23,19 @@ body {
   background-image: url(../img/background.jpg);
   color: white;
 
+}
+
+#row {
+  display: none;
+}
+
+#playerOneButton {
+  visibility: visible;
+  opacity: 1;
+}
+
+#playerTwoButton {
+  visibility: visible;
+  width: 108px;
+  opacity: 1;
 }

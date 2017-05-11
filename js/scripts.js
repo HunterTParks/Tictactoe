@@ -1,6 +1,5 @@
 $(document).ready(function(){
   var newGame = new Game();
-  var gameTime = 0;
 
   newGame.array[0] = false;
   newGame.array[1] = false;
@@ -11,34 +10,35 @@ $(document).ready(function(){
   newGame.array[6] = false;
   newGame.array[7] = false;
   newGame.array[8] = false;
+  newGame.playerOrAi = false;
+  var test = 0;
+
+  $("#playerOneButton").click(function(){
+    $("#startScreen").hide();
+    $("#row").show();
+  });
+
+  $("#playerTwoButton").click(function(){
+    $("#startScreen").hide();
+    $("#row").show();
+    newGame.playerOrAi = true;
+  })
 
   $("#topLeft").click(function(){
     if(newGame.array[0] === false){
-      $("#topLeft").empty();
-      //if(playerone turn)
-      $("#topLeft").append('<h1>' + newGame.player1 + '</h1>');
-
-      gameTime += 1;
-      newGame.array[0] = true;
-      newGame.win[0] = "x";
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 0;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
         winner(newGame);
-
     }
-
   });
   $("#topCenter").click(function(){
     if(newGame.array[1] === false){
-      $("#topCenter").empty();
-      $("#topCenter").append('<h1>' + newGame.player1 + '</h1>');
-      newGame.array[1] = true;
-      newGame.win[1] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 1;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
       winner(newGame);
@@ -46,13 +46,9 @@ $(document).ready(function(){
   });
   $("#topRight").click(function(){
     if(newGame.array[2] === false){
-      $("#topRight").empty();
-      $("#topRight").append('<h1>' + newGame.player1 + '</h1>');
-      newGame.array[2] = true;
-      newGame.win[2] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 2;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
       winner(newGame);
@@ -60,13 +56,9 @@ $(document).ready(function(){
   });
   $("#middleLeft").click(function(){
     if(newGame.array[3] === false){
-      $("#middleLeft").empty();
-      $("#middleLeft").append('<h1>' + newGame.player1 + '</h1>');
-      newGame.array[3] = true;
-      newGame.win[3] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 3;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
       winner(newGame);
@@ -74,13 +66,9 @@ $(document).ready(function(){
   });
   $("#middleCenter").click(function(){
     if(newGame.array[4] === false){
-      $("#middleCenter").empty();
-      $("#middleCenter").append('<h1>' + newGame.player1 + '</h1>');
-      newGame.array[4] = true;
-      newGame.win[4] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 4;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
       winner(newGame);
@@ -88,13 +76,9 @@ $(document).ready(function(){
   });
   $("#middleRight").click(function(){
     if(newGame.array[5] === false){
-      $("#middleRight").empty();
-      $("#middleRight").append('<h1>' + newGame.player1 + '</h1>');
-      newGame.array[5] = true;
-      newGame.win[5] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 5;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
     winner(newGame);
@@ -102,13 +86,9 @@ $(document).ready(function(){
   });
   $("#bottomLeft").click(function(){
     if(newGame.array[6] === false){
-      $("#bottomLeft").empty();
-      $("#bottomLeft").append('<h1>' + newGame.player1 + '</h1>');
-      newGame.array[6] = true;
-      newGame.win[6] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 6;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
       winner(newGame);
@@ -116,63 +96,26 @@ $(document).ready(function(){
   });
   $("#bottomCenter").click(function(){
     if(newGame.array[7] === false){
-      $("#bottomCenter").empty();
-      $("#bottomCenter").append('<h1>' + newGame.player1 + '</h1>');
-
-      newGame.array[7] = true;
-      newGame.win[7] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 7;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
       winner(newGame);
     }
-
   });
   $("#bottomRight").click(function(){
     if(newGame.array[8] === false){
-      $("#bottomRight").empty();
-      $("#bottomRight").append('<h1>' + newGame.player1 + '</h1>');
-      newGame.array[8] = true;
-      newGame.win[8] = "x";
-      gameTime += 1;
-      gameTime = aiChoose(newGame, gameTime);
-      if(gameTime > 8){
+      test = 8;
+      newGame = newGame.turnOrder(newGame, test);
+      if(newGame.gameTime > 8){
         gameOver();
       }
       winner(newGame);
     }
   });
-
   return false;
 });
-
-var aiChoose = function(newGame, gameTime){
-  for(var i = 0; i < 30; i++){
-    var random = ((Math.floor(Math.random() * 8) + 1));
-    if(newGame.array[random] === false){
-      var number = newGame.board[random];
-      $(newGame.board[random]).empty();
-      $(number).append('<h1>' + 'O' + '</h1>');
-      $(newGame.array[random] = true);
-      console.log(gameTime);
-
-      return gameTime + 1;
-    }
-  }
-  if(gameTime > 8){
-    gameOver(newGame);
-  }
-}
-function Game (){
-  this.player1 = "X";
-  this.player2 = "O";
-  this.board = ["#topLeft", "#topCenter", "#topRight", "#middleLeft", "#middleCenter", "#middleRight", "#bottomLeft", "#bottomCenter", "#bottomRight"]
-  this.array = ["tlBool", "tcBool", "trBool", "mlBool", "mcBool", "mrBool", "blBool", "bcBool", "brBool"];
-  this.win = ["", "", "", "", "", "", "", "", ""];
-}
-
 var gameOver = function(newGame){
   $(".row").hide();
   $("#gameOver").append('<h1>' + "GAME OVER" + '</h1>');
@@ -191,6 +134,58 @@ var restart = function(newGame){
   });
 }
 
+Game.prototype.turnOrder = function(newGame, test){
+  $(newGame.board[test]).empty();
+  console.log(newGame.gameTime);
+  if(newGame.gameTime === 0 || newGame.gameTime % 2 === 0){
+    $(newGame.board[test]).append('<h1>' + newGame.player1 + '</h1>');
+    newGame.array[test] = true;
+    newGame.win[test] = "x";
+    newGame.gameTime += 1;
+    if(newGame.playerOrAi === false){
+      newGame = aiChoose(newGame, test);
+    }
+  }
+  else if(newGame.gameTime % 2 !== 0){
+    $(newGame.board[test]).append('<h1>' + 'O' + '</h1>');
+    newGame.array[test] = true;
+    newGame.win[test] = "o";
+    newGame.gameTime += 1;
+  }
+  return newGame;
+}
+
+var aiChoose = function(newGame){
+  for(var i = 0; i < 30; i++){
+    var random = ((Math.floor(Math.random() * 8) + 1));
+    if(newGame.array[random] === false){
+      //console.log("TEST IS " + test);
+      var number = newGame.board[random];
+      $(newGame.board[random]).empty();
+      $(number).append('<h1>' + 'O' + '</h1>');
+      $(newGame.array[random] = true);
+      newGame.gameTime += 1;
+      newGame.win[random] = "o";
+      console.log(newGame.win);
+      //winner(newGame);
+      return newGame;
+    }
+  }
+  if(newGame.gameTime > 8){
+    gameOver(newGame);
+  }
+}
+function Game (){
+  this.player1 = "X";
+  this.player2 = "O";
+  this.board = ["#topLeft", "#topCenter", "#topRight", "#middleLeft", "#middleCenter", "#middleRight", "#bottomLeft", "#bottomCenter", "#bottomRight"]
+  this.array = ["tlBool", "tcBool", "trBool", "mlBool", "mcBool", "mrBool", "blBool", "bcBool", "brBool"];
+  this.win = ["", "", "", "", "", "", "", "", ""];
+  this.playerOrAi;
+  this.gameTime = 0;
+}
+
+
 function myFunction() {
     location.reload();
 };
@@ -201,10 +196,28 @@ var winner = function(newGame) {
       alert("Player 1 Wins!!!!!");
       gameOver(newGame);
     }
+    else if(newGame.win[0] === "o"){
+      if(playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
+      gameOver(newGame);
+    }
   }
   if (newGame.win[3] === newGame.win[4] && newGame.win[3] === newGame.win[5]){
     if(newGame.win[3] === "x"){
       alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+    else if(newGame.win[3] === "o"){
+      if(playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
       gameOver(newGame);
     }
   }
@@ -213,10 +226,28 @@ var winner = function(newGame) {
       alert("Player 1 Wins!!!!!");
       gameOver(newGame);
     }
+    else if(newGame.win[6] === "o"){
+      if(playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
+      gameOver(newGame);
+    }
   }
   if (newGame.win[0] === newGame.win[3] && newGame.win[0] === newGame.win[6]){
     if(newGame.win[0] === "x"){
       alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+    else if(newGame.win[0] === "o"){
+      if(playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
       gameOver(newGame);
     }
   }
@@ -225,10 +256,28 @@ var winner = function(newGame) {
       alert("Player 1 Wins!!!!!");
       gameOver(newGame);
     }
+    else if(newGame.win[1] === "o"){
+      if(newGame.playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
+      gameOver(newGame);
+    }
   }
   if (newGame.win[2] === newGame.win[5] && newGame.win[2] === newGame.win[8]){
     if(newGame.win[2] === "x"){
       alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+    else if(newGame.win[2] === "o"){
+      if(playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
       gameOver(newGame);
     }
   }
@@ -237,10 +286,28 @@ var winner = function(newGame) {
       alert("Player 1 Wins!!!!!");
       gameOver(newGame);
     }
+    else if(newGame.win[0] === "o"){
+      if(newGame.playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
+      gameOver(newGame);
+    }
   }
   if (newGame.win[2] === newGame.win[4] && newGame.win[2] === newGame.win[6]){
     if(newGame.win[2] === "x"){
       alert("Player 1 Wins!!!!!");
+      gameOver(newGame);
+    }
+    else if(newGame.win[2] === "o"){
+      if(newGame.playerOrAi === false){
+        alert("COMPUTER WINS!!!!!");
+      }
+      else{
+        alert("Player 2 Wins!!!!!");
+      }
       gameOver(newGame);
     }
   }
